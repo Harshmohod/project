@@ -15,12 +15,19 @@ CREATE TABLE IF NOT EXISTS `account_details` (
   `State` VARCHAR(100) NOT NULL,
   `City` VARCHAR(100) NOT NULL,
   `Region` VARCHAR(100) NOT NULL,
+  `user_type` ENUM('user', 'tehsildar', 'admin') NOT NULL DEFAULT 'user',
   `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_username` (`Username`),
   UNIQUE KEY `uniq_email` (`Email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Sample admin/tehsildar rows can be added later if roles are introduced
+-- Insert sample admin user (password: admin123)
+INSERT INTO `account_details` (`Fullname`, `Username`, `Email`, `Password`, `phone_number`, `State`, `City`, `Region`, `user_type`) VALUES
+('System Administrator', 'admin', 'admin@landreg.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1234567890', 'Maharashtra', 'Mumbai', 'Mumbai', 'admin');
+
+-- Insert sample tehsildar user (password: tehsildar123)
+INSERT INTO `account_details` (`Fullname`, `Username`, `Email`, `Password`, `phone_number`, `State`, `City`, `Region`, `user_type`) VALUES
+('Tehsildar Officer', 'tehsildar', 'tehsildar@landreg.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '9876543210', 'Maharashtra', 'Pune', 'Pune', 'tehsildar');
 
 

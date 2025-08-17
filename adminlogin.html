@@ -106,7 +106,14 @@
 
         if (data.success) {
           alert('Login successful!');
-          window.location.href = 'userdashboard.php';
+          // Redirect based on user type
+          if (data.user && data.user.user_type === 'admin') {
+            window.location.href = "admindashboard.php";
+          } else if (data.user && data.user.user_type === 'tehsildar') {
+            window.location.href = "tehsildardashboard.php";
+          } else {
+            window.location.href = "userdashboard.php";
+          }
         } else {
           alert(data.message || "Login failed. Please try again.");
         }

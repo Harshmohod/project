@@ -26,6 +26,7 @@ $phone    = trim($data['phone'] ?? $data['phone_number'] ?? '');
 $state    = trim($data['state'] ?? $data['State'] ?? '');
 $city     = trim($data['city'] ?? $data['City'] ?? '');
 $region   = trim($data['region'] ?? $data['Region'] ?? '');
+$userType = trim($data['user_type'] ?? 'user'); // Default to 'user' for new registrations
 
 if ($fullName === '' || $userName === '' || $email === '' || $password === '' || $phone === '' || $state === '' || $city === '' || $region === '') {
     http_response_code(400);
@@ -66,14 +67,14 @@ try {
 $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
 try {
-    $stmt = $mysqli->prepare('INSERT INTO account_details (Fullname, Username, Email, Password, phone_number, State, City, Region) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $mysqli->prepare('INSERT INTO account_details (Fullname, Username, Email, Password, phone_number, State, City, Region, user_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
     if (!$stmt) {
         http_response_code(500);
         echo json_encode(['success' => false, 'message' => 'Database error (prepare insert): ' . $mysqli->error]);
         exit;
     }
 
-    $stmt->bind_param('ssssssss', $fullName, $userName, $email, $passwordHash, $phone, $state, $city, $region);
+    $stmt->bind_param('sssssssss', $fullName, $userName, $email, $passwordHash, $phone, $state, $city, $region, $userType);
     $ok = $stmt->execute();
 
     if (!$ok) {
@@ -94,6 +95,7 @@ $stmt->close();
 $_SESSION['user_id'] = $userId;
 $_SESSION['username'] = $userName;
 $_SESSION['email'] = $email;
+$_SESSION['user_type'] = $userType;
 
 echo json_encode([
     'success' => true,
@@ -102,6 +104,7 @@ echo json_encode([
         'id' => $userId,
         'username' => $userName,
         'email' => $email,
+        'user_type' => $userType
     ],
 ]);
 

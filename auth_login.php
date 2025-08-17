@@ -26,7 +26,7 @@ if ($identifier === '' || $password === '') {
 }
 
 // Fetch user by email or username
-$stmt = $mysqli->prepare('SELECT id, Username, Email, Password FROM account_details WHERE Email = ? OR Username = ? LIMIT 1');
+$stmt = $mysqli->prepare('SELECT id, Username, Email, Password, user_type FROM account_details WHERE Email = ? OR Username = ? LIMIT 1');
 $stmt->bind_param('ss', $identifier, $identifier);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -48,6 +48,7 @@ if (!password_verify($password, $user['Password'])) {
 $_SESSION['user_id'] = (int)$user['id'];
 $_SESSION['username'] = $user['Username'];
 $_SESSION['email'] = $user['Email'];
+$_SESSION['user_type'] = $user['user_type'];
 
 echo json_encode([
     'success' => true,
@@ -56,7 +57,7 @@ echo json_encode([
         'id' => (int)$user['id'],
         'username' => $user['Username'],
         'email' => $user['Email'],
-        'user_type' => 'user'
+        'user_type' => $user['user_type']
     ]
 ]);
 
