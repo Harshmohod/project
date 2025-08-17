@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land Registration and Evidence Management System</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        /* Optional: make anchor links inside buttons inherit button styles */
+        .btn a {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <!-- Logo + Title -->
+        <div class="logo-container">
+            <div class="navbar-logo">
+                <img src="logo.png" alt="Logo">
+            </div>
+            <div class="logo-text">Land Registration and Evidence Management System</div>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    
+
+    <!-- Home Section -->
+    <section id="home" class="section home-section">
+        <h1 class="main-heading">Digital Evidence Verification</h1>
+        <div class="container">
+            <h2 class="subheading">Select Login Type</h2>
+            <div class="btn-group">
+                <button class="btn login-button"><a href="userlogin.html">User/Citizen</a></button>
+                <button class="btn login-button"><a href="tehlogin.html">Tehsildar</a></button>
+                <button class="btn login-button"><a href="adminlogin.html">Admin</a></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <h2>About This Website</h2>
+        <p>
+            The Land Registration and Evidence Management System is designed to digitalize
+            the process of land/property documentation and verification. Users can submit
+            documents online, which are verified by authorized officials. The system enhances
+            transparency, reduces paperwork, and speeds up the verification process.
+        </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <h2>Contact Us</h2>
+        <p>Email: support@example.com</p>
+        <p>Phone: +91 9876543210</p>
+        <p>Address: Nagpur, Maharashtra, India</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Land Registration and Evidence Management System. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript for smooth scroll -->
+    <script>
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(link.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
